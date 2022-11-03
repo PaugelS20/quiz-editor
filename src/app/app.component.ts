@@ -29,8 +29,14 @@ export class AppComponent implements OnInit {
       }))
     }));
     console.log(this.quizzes);
-    
   }
 
+
   quizzes: QuizDisplay[] = [];
+
+  selectedQuiz: QuizDisplay | undefined = undefined;
+  
+  selectQuiz = (quizToSelect: QuizDisplay) => {
+    this.selectedQuiz = quizToSelect;
+  };
 }
