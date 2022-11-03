@@ -3,8 +3,10 @@
 		<div class="col-md-4">
 			<button class="btn btn-outline-success mt-3">Add New Quiz</button>
 			<div class="card mt-3">
-				<div class="card-header">Quizes</div>
-				<div class="card-body">Coming Soon</div>
+				<div class="list-group list-group-flush">
+					<button class="list-group-item list-group-item-action"
+					*ngFor="let q of quizzes"> {{q.quizName}}</button>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-8">
