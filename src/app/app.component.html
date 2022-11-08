@@ -4,11 +4,19 @@
 			<button class="btn btn-outline-success mt-3" (click)="addNewQuiz()">Add New Quiz</button>
 			<div class="card mt-3">
 				<div class="list-group list-group-flush">
-					<button class="list-group-item list-group-item-action"
+					<button class="list-group-item list-group-item-action justify-content-between align-items-center"
 					*ngFor="let q of quizzes"
 					[class.active]="q === selectedQuiz"
 					(click)="selectQuiz(q)">
-					{{q.quizName}}</button>
+					
+					<span class="text-truncate mr-5"></span>
+					{{q.quizName}}
+					
+					
+					<small class="fst-italic fw-lighter text-nowrap">
+						{{ q.quizQuestions.length }} question<span *ngIf="q.quizQuestions.length !== 1">s</span>
+					</small>
+				</button>
 				</div>
 			</div>
 		</div>
@@ -23,9 +31,7 @@
 				<div class="card-header">General</div>
 				<div class="card-body">
 					<input type="text" class="form-control" [(ngModel)]="selectedQuiz.quizName">
-				</div>
-				
-				
+				</div>	
 			</div>
 
 			<div class="card mt-3">
