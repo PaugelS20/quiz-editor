@@ -36,8 +36,8 @@ export class AppComponent implements OnInit {
   addNewQuiz = () => {
     const newQuiz: QuizDisplay = {
       quizName: 'untitled',
-      quizQuestions: [],
-    }
+      quizQuestions: []
+    };
     this.quizzes = [
       ...this.quizzes
       , newQuiz
