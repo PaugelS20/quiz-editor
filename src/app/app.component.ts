@@ -12,36 +12,52 @@ interface QuestionDisplay {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  
-  constructor(private quizSvc: QuizService){};
-  
+  constructor(private quizSvc: QuizService) {}
+
   ngOnInit() {
     const data = this.quizSvc.loadQuizzes();
     console.log(data);
-    
-    this.quizzes = data.map((x:any) => ({
-      quizName: x.name
-      , quizQuestions: x.questions.map((y:any) => ({questionText: y.name}))
+
+    this.quizzes = data.map((x: any) => ({
+      quizName: x.name,
+      quizQuestions: x.questions.map((y: any) => ({ questionText: y.name })),
     }));
     console.log(this.quizzes);
   }
 
   quizzes: QuizDisplay[] = [];
   selectedQuiz: QuizDisplay | undefined = undefined;
-  selectQuiz = (quizToSelect: QuizDisplay) => {this.selectedQuiz = quizToSelect;};
-  
+  selectQuiz = (quizToSelect: QuizDisplay) => {
+    this.selectedQuiz = quizToSelect;
+  };
+
   addNewQuiz = () => {
     const newQuiz: QuizDisplay = {
       quizName: 'untitled',
-      quizQuestions: []
+      quizQuestions: [],
     };
-    this.quizzes = [
-      ...this.quizzes
-      , newQuiz
-    ];
+    this.quizzes = [...this.quizzes, newQuiz];
     this.selectQuiz(newQuiz);
   };
-}
+
+  addNewQuestion = () => {
+    if (this.selectedQuiz !== undefined) {
+      this.selectedQuiz.quizQuestions = [
+        ...this.selectedQuiz.quizQuestions,
+        {
+          questionText: 'New Question',
+        },
+      ];
+    }
+  };
+
+  removeQuestion = (questionToRemove: QuestionDisplay) => {
+    if (this.selectedQuiz !== undefined) {
+      this.selectedQuiz.quizQuestions = this.selectedQuiz.quizQuestions.
+      filter(x => x !== questionToRemove)
+    }
+  }
+};

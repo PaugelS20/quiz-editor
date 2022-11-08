@@ -4,7 +4,7 @@
 			<button class="btn btn-outline-success mt-3" (click)="addNewQuiz()">Add New Quiz</button>
 			<div class="card mt-3">
 				<div class="list-group list-group-flush">
-					<button class="list-group-item list-group-item-action justify-content-between align-items-center"
+					<button class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
 					*ngFor="let q of quizzes"
 					[class.active]="q === selectedQuiz"
 					(click)="selectQuiz(q)">
@@ -13,10 +13,10 @@
 					{{q.quizName}}
 					
 					
-					<small class="fst-italic fw-lighter text-nowrap">
+					<small class="fst-italic fw-lighter text-nowrap align-items-end">
 						{{ q.quizQuestions.length }} question<span *ngIf="q.quizQuestions.length !== 1">s</span>
 					</small>
-				</button>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,25 @@
 
 			<div class="card mt-3">
 				<div class="card-header">Questions</div>
-				<div class="card-body">Coming Soon</div>
+				<div class="card-body">
+					<button class="btn btn-outline-success"
+					(click)="addNewQuestion()">
+						Add New Questions
+					</button>
+					<div class="row mt-3"
+					*ngFor="let question of selectedQuiz.quizQuestions">
+						
+						<div class="col-md-10">
+							<input type="text" class="form-control" [(ngModel)]="question.questionText"/>
+						</div>
+						
+						<div class="col-md-2">
+							<button class="btn btn-link text-danger " (click)="removeQuestion(question)">
+								Remove
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="card mt-3">
