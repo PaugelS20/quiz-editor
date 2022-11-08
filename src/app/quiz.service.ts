@@ -14,17 +14,21 @@ export class QuizService {
       name: 'Quiz 1'
 	  , questions:[
       	{
-        name: 'Question 1'
+        	name: 'Question 1'
       	},
       	{
-        name: 'Question 2'
+        	name: 'Question 2'
         }
       ]
 	}
-	, {
+		, {
 		name: 'Quiz 2',
 		questions: []
-	   	}
+		}
+		, {
+		name: 'Untitled',
+		questions: []
+		}
 	];
 	return quizzesFromWeb;
 	};

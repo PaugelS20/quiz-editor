@@ -24,19 +24,25 @@ export class AppComponent implements OnInit {
     
     this.quizzes = data.map((x:any) => ({
       quizName: x.name
-      , quizQuestions: x.questions.map((y:any) => ({
-        questionText: y.name
-      }))
+      , quizQuestions: x.questions.map((y:any) => ({questionText: y.name}))
     }));
     console.log(this.quizzes);
   }
 
-
   quizzes: QuizDisplay[] = [];
-
   selectedQuiz: QuizDisplay | undefined = undefined;
+  selectQuiz = (quizToSelect: QuizDisplay) => {this.selectedQuiz = quizToSelect;};
   
-  selectQuiz = (quizToSelect: QuizDisplay) => {
-    this.selectedQuiz = quizToSelect;
+  addNewQuiz = () => {
+    console.log('addNewQuiz');
+    this.quizzes = [
+      ...this.quizzes,
+      {
+        quizName: 'untitled',
+        quizQuestions:;
+
+      },
+    ];
   };
+
 }
