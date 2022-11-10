@@ -9,6 +9,7 @@
 					[class.active]="q === selectedQuiz"
 					(click)="selectQuiz(q)">
 					
+					[style.text-decoration]="q.markedForDelete ? 'line-through' : 'inherit'"
 					<span class="text-truncate mr-5">
 						{{q.quizName}}
 					</span>
