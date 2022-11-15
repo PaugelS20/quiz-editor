@@ -12,7 +12,9 @@ interface QuizFromWeb {
 })
 export class QuizService {
 
-  constructor() { }
+  constructor(
+	private
+  ) { }
   
   loadQuizzes = (): QuizFromWeb[] => {
     
