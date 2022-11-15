@@ -28,13 +28,19 @@ export class AppComponent implements OnInit {
       next: (data) => {
         console.log("data", data);
 
-        this.quizzes = data.map((x: any) => ({
-          quizName: x.name,
-          quizQuestions: x.questions.map((y: any) => ({ questionText: y.name }))
+        this.quizzes = [
+          ...this.quizzes
+          , ...data.map((x: any) => ({
+          quizName: x.name
+          ,quizQuestions: x.questions.map((y: any) => ({ 
+            questionText: y.name 
+          }))
           , markedForDelete: false
         }))
+      ];
         console.log(this.quizzes);      
       }
+
       , error: (err) => {
         console.error(err);
         this.errorLoadingQuizzes = true;
