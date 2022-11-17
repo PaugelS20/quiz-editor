@@ -19,34 +19,28 @@ export class AppComponent implements OnInit {
   constructor(private quizSvc: QuizService) {}
 
   errorLoadingQuizzes = false;
+  
+  loadQuizzesFromWeb = async () => {
+    try {
+      
+      const data = await this.quizSvc.loadQuizzes();
+      console.log(data);
 
-  ngOnInit() {
-    const data = this.quizSvc.loadQuizzes();
-    console.log(data);
 
-    data.subscribe({
-      next: (data) => {
-        console.log("data", data);
-
-        this.quizzes = [
-          ...this.quizzes
-          , ...data.map((x: any) => ({
+        this.quizzes = data.map((x) => ({
           quizName: x.name
-          ,quizQuestions: x.questions.map((y: any) => ({ 
+          , quizQuestions: x.questions.map((y: any) => ({ 
             questionText: y.name 
           }))
           , markedForDelete: false
-        }))
-      ];
-        console.log(this.quizzes);      
+        }));
       }
-
-      , error: (err) => {
-        console.error(err);
-        this.errorLoadingQuizzes = true;
+      catch (err) {
+      console.log(err);
       }
-    });
-
+  };
+  ngOnInit() {
+    this.loadQuizzesFromWeb();
   }
 
   quizzes: QuizDisplay[] = [];
@@ -130,7 +124,7 @@ export class AppComponent implements OnInit {
       const n2 = this.quizSvc.getMagicNumber(true);
       console.log(n2);
 
-      const results = await Promise.any([n1, n2]);
+      const results = await Promise.any([n1, n2]);1
       // const results = await Promise.all([n1, n2]);
       // const results = await Promise.race([n1, n2]); // race shows the first result that comes back and only that result
       console.log(results);
