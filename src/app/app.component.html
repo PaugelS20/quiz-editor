@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row"
-	*ngIF="errorLoadingQuizzes"
+	*ngIf="errorLoadingQuizzes"
 	>
 		<div class="col-md-12">
 			<div class="alert alert-info mt-3">
@@ -101,6 +101,16 @@
 				class="d-flex align-items-center justify-content-center">Please select or 
 				<button class="btn btn-link p-1" (click)="addNewQuiz()">add a new quiz</button>	
 					to get started...</p>
+					<p>
+						<button class="btn btn-link"
+							(click)="jsPromisesOne()">
+							One</button>
+						<button class="btn btn-link"
+							(click)="jsPromisesTwo()">
+							Two</button>
+						<button class="btn btn-link" (click)="jsPromisesThree()">
+							Three</button>
+					</p>
 			</div>
 		</div>
 	</div>

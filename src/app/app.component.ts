@@ -81,7 +81,63 @@ export class AppComponent implements OnInit {
       this.selectedQuiz.quizQuestions = this.selectedQuiz.quizQuestions.
       filter(x => x !== questionToRemove)
     }
+  };
+
+  jsPromisesOne = () => {
+    const n1 = this.quizSvc.getMagicNumber(true);
+    console.log(n1);
+    
+    n1
+    .then(
+      n => {
+        console.log(n);
+        const n2 = this.quizSvc.getMagicNumber(true);
+        n2
+        .then(
+          n=> console.log(n)
+        )
+        .catch(
+          e =>console.log(e)
+        )
+      }
+    )
+    .catch(
+      e => {
+        console.log(e);
+        
+      }
+    );
+  };
+  
+  jsPromisesTwo = async () => {
+    try {
+      const n1 = await this.quizSvc.getMagicNumber(false);
+      console.log(n1);
+      
+      const n2 = await this.quizSvc.getMagicNumber(true);
+      console.log(n2);
+    }
+    catch (err) {
+      console.log(err);  
+    }
   }
 
+  jsPromisesThree = async () => {
+    try {
+      const n1 = this.quizSvc.getMagicNumber(false);
+      console.log(n1);
+      
+      const n2 = this.quizSvc.getMagicNumber(true);
+      console.log(n2);
 
+      const results = await Promise.any([n1, n2]);
+      // const results = await Promise.all([n1, n2]);
+      // const results = await Promise.race([n1, n2]); // race shows the first result that comes back and only that result
+      console.log(results);
+      
+    }
+    catch (err) {
+      console.log(err);  
+    }
+  }
 };
