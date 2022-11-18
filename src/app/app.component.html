@@ -1,17 +1,29 @@
 <div class="container">
-	<div class="row"
-	*ngIf="errorLoadingQuizzes"
-	>
+	
+	<div class="row" *ngIf="errorLoadingQuizzes">
+		
 		<div class="col-md-12">
 			<div class="alert alert-info mt-3">
 				Error loading quizzes, please refresh to try again...
 			</div>
 		</div>
 	</div>
-	<div class="row"
 	
-	*ngIf="!errorLoadingQuizzes"
-	>
+	<div class="row" *ngIf="!errorLoadingQuizzes">
+		
+		<!-- new loading row  -->
+		<div class="row" *ngIf="errorLoadingQuizzes">
+		
+			<div class="col-md-12">
+				<div class="alert alert-info mt-3">
+					Error loading quizzes, please refresh to try again...
+				</div>
+			</div>
+		</div>
+		<div class="row" *ngIf="!errorLoadingQuizzes">
+		<!-- new loading row  -->
+
+		
 		<div class="col-md-4">
 			<button class="btn btn-outline-success mt-3" (click)="addNewQuiz()">Add New Quiz</button>
 			<div class="card mt-3" *ngIf="quizzes.length > 0">
