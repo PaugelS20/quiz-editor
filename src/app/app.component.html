@@ -1,5 +1,13 @@
 <div class="container">
-	
+	<!-- new loading row  -->
+	<div class="row" *ngIf="loading">
+		
+		<div class="col-md-12">
+			<div class="alert alert-info mt-3">
+				Loading				
+			</div>
+		</div>
+	</div>
 	<div class="row" *ngIf="errorLoadingQuizzes">
 		
 		<div class="col-md-12">
@@ -11,15 +19,7 @@
 	
 	<!-- <div class="row" *ngIf="!errorLoadingQuizzes"> -->
 		
-		<!-- new loading row  -->
-		<div class="row" *ngIf="loading">
-		
-			<div class="col-md-12">
-				<div class="alert alert-info mt-3">
-					Error loading quizzes, please refresh to try again...
-				</div>
-			</div>
-		</div>
+
 		<!-- <div class="row" *ngIf="!errorLoadingQuizzes"> -->
 		<!-- new loading row  -->
 
