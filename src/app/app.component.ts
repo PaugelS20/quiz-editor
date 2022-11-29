@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from './quiz.service';
 
+
 interface QuizDisplay {
   quizName: string;
   quizQuestions: QuestionDisplay[];
   markedForDelete: boolean;
+  newlyAdded: boolean;
+  naiveChecksum?: string;
 }
 interface QuestionDisplay {
   questionText: string;
@@ -36,6 +39,12 @@ export class AppComponent implements OnInit {
             questionText: y.name 
           }))
           , markedForDelete: false
+          , newlyAdded: false
+        }));
+
+        this.quizzes = this.quizzes.map(x => ({
+          ...x
+          , naiveChecksum: this.generateNaiveChecksum(x)
         }));
       }
       catch (err) {
@@ -57,10 +66,12 @@ export class AppComponent implements OnInit {
   };
 
   addNewQuiz = () => {
+   
     const newQuiz: QuizDisplay = {
       quizName: 'Untitled Quiz',
       quizQuestions: [],
       markedForDelete: false
+    , newlyAdded:true
     };
     this.quizzes = [...this.quizzes, newQuiz];
     this.selectQuiz(newQuiz);
@@ -141,7 +152,7 @@ export class AppComponent implements OnInit {
       console.log(err);  
     }
   };
-  cancelAllChanges =()=> {
+  cancelAllChanges = () => {
     this.loadQuizzesFromWeb();
     this.selectedQuiz = undefined;
   };
@@ -150,5 +161,30 @@ export class AppComponent implements OnInit {
 
     get deletedQuizCount() {
       return this.getDeletedQuizzes().length;
+    }
+
+    getAddedQuizzes = () => this.quizzes.filter(x => 
+      x.newlyAdded 
+      && !x.markedForDelete
+      );
+
+    get addedQuizCount() {
+      return this.getAddedQuizzes().length;
+    }
+
+    generateNaiveChecksum = (q:QuizDisplay) => {
+      return q.quizName
+      + "~"
+      + q.quizQuestions.map(x => x.questionText).join("~");
+    };
+
+    getEditedQuizzes = () => this.quizzes.filter(x => 
+      !x.newlyAdded 
+      && !x.markedForDelete
+      && this.generateNaiveChecksum(x) != x.naiveChecksum
+      );
+
+    get editedQuizCount() {
+      return this.getEditedQuizzes().length;
     }
 }
