@@ -19,9 +19,12 @@ export class AppComponent implements OnInit {
   constructor(private quizSvc: QuizService) {}
 
   errorLoadingQuizzes = false;
-  
+  loading = true;
+
   loadQuizzesFromWeb = async () => {
+
     try {
+      this.loading = true;
       
       const data = await this.quizSvc.loadQuizzes();
       console.log(data);
@@ -36,7 +39,11 @@ export class AppComponent implements OnInit {
         }));
       }
       catch (err) {
-      console.log(err);
+        console.log(err);
+        this.errorLoadingQuizzes = true;
+      }
+      finally {
+        this.loading = false;
       }
   };
   ngOnInit() {
@@ -133,5 +140,9 @@ export class AppComponent implements OnInit {
     catch (err) {
       console.log(err);  
     }
+  };
+  cancelAllChanges =()=> {
+    this.loadQuizzesFromWeb();
+    this.selectedQuiz = undefined;
   }
-};
+}
