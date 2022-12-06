@@ -249,5 +249,6 @@ export class AppComponent implements OnInit {
     detailsAnimationDone = () => {
       this.detailsAnimationState = "leftPosition";
     };
+    
 		
 }
